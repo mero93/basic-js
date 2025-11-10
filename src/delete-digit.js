@@ -13,13 +13,13 @@ const { NotImplementedError } = require('../lib');
  */
 function deleteDigit(n) {
   // Remove line below and write your code here
-  const digitArray = n.toString().split('');
+  const str = n.toString();
   let max = 0;
-  for (let i = 0; i < digitArray.length; i++) {
-    const newNumber = digitArray.filter((d) => d !== digitArray[i]).join('');
+  for (let i = 0; i < str.length; i++) {
+    const currentNumber = Number(str.slice(0, i) + str.slice(i + 1));
 
-    if (Number(newNumber) > max) {
-      max = Number(newNumber);
+    if (Number(currentNumber) > max) {
+      max = Number(currentNumber);
     }
   }
   return max;

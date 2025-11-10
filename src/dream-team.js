@@ -15,15 +15,19 @@ const { NotImplementedError } = require('../lib');
  */
 function createDreamTeam(members) {
   // Remove line below and write your code here
+  if (!Array.isArray(members)) {
+    return false;
+  }
+
   const firstLetters = [];
 
   for (const member of members) {
-    if (typeof member === 'string' && member.length > 0) {
-      firstLetters.push(member[0].toUpperCase());
+    if (typeof member === 'string') {
+      firstLetters.push(member.trim()[0].toUpperCase());
     }
   }
 
-  return firstLetters.sort().toUpperCase().join('');
+  return firstLetters.sort().join('');
 }
 
 module.exports = {

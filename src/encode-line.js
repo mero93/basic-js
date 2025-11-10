@@ -13,24 +13,25 @@ const { NotImplementedError } = require('../lib');
 
 function encodeLine(str) {
   // Remove line below and write your code here
-  const map = new Map();
+  if (!str) {
+    return '';
+  }
 
-  for (let i = 0; i < str.length; i++) {
-    if (map.has(str[i])) {
-      map.set(str[i], map.get(str[i]) + 1);
-    } else {
-      map.set(str[i], 1);
+  let encoded = '';
+  let i = 0;
+  while (i < str.length) {
+    const char = str[i];
+    let count = 1;
+    let j = i + 1;
+    while (j < str.length && str[j] === char) {
+      count++;
+      j++;
     }
+    encoded += (count > 1 ? count : '') + char;
+    i = j;
   }
 
-  const result = [];
-
-  for (const [key, value] of map) {
-    result.push(value);
-    result.push(key);
-  }
-
-  return result.join('');
+  return encoded;
 }
 
 module.exports = {

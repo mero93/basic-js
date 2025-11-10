@@ -14,17 +14,33 @@ const { NotImplementedError } = require('../lib');
 
 function getCommonCharacterCount(s1, s2) {
   // Remove line below and write your code here
-  const commonUniqueCharacters = new Set();
+  const s1Map = new Map();
+  const s2Map = new Map();
+  let commonChars = 0;
 
-  for (let i = 0; i < s1.length; i++) {
-    for (let j = 0; j < s2.length; j++) {
-      if (s1[i] === s2[j]) {
-        commonUniqueCharacters.add(s1[i]);
-      }
+  for (const char of s1) {
+    if (s1Map.has(char)) {
+      s1Map.set(char, s1Map.get(char) + 1);
+    } else {
+      s1Map.set(char, 1);
     }
   }
 
-  return commonUniqueCharacters.size;
+  for (const char of s2) {
+    if (s2Map.has(char)) {
+      s2Map.set(char, s2Map.get(char) + 1);
+    } else {
+      s2Map.set(char, 1);
+    }
+  }
+
+  for (const [key, value] of s1Map) {
+    if (s2Map.has(key)) {
+      commonChars += Math.min(value, s2Map.get(key));
+    }
+  }
+
+  return commonChars;
 }
 
 module.exports = {
